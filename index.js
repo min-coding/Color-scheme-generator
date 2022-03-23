@@ -31,11 +31,13 @@ async function getScheme() {
 }
 
 function render(){
-  const colortHtml = colorScheme.map((item,index) =>{
+  const colortHtml = colorScheme.map((item) =>{
+
     return `
     <div class='container-color-scheme' id=${item.id} onclick=getHex(${item.id})>
-    <div class='color-scheme' style="background-color:${item.hex.value}"></div>
-    <div class='modal'> Click to copy code </div>
+    <div class='color-scheme' style="background-color:${item.hex.value}"> 
+    </div>
+    <div class='modal'> Click to copy! </div>
     <div class='hexCode'> ${item.hex.value} </div>
     </div>
     `
