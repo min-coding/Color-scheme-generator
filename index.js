@@ -19,21 +19,19 @@ chosenColor.addEventListener('change',function(){
 })
 
 // Fetch the scheme
-async function getScheme() {
-  const response = await fetch(`https://www.thecolorapi.com/scheme?hex=${colorCode}&mode=${modeValue}&count=4`);
-  const data = await response.json();
-  console.log(data)
-   colorScheme = data.colors
+async function fetchColor() {
+    const response = await fetch(`https://www.thecolorapi.com/scheme?hex=${colorCode}&mode=${modeValue}&count=4`);
+    const data = await response.json();
+    colorScheme = data.colors
 
-  //  Set id property to each color
-   for(i=0; i< colorScheme.length;i++){
-    colorScheme[i].id = i+1
-   }
+    //  Set id property to each color
+     for(i=0; i< colorScheme.length;i++){
+      colorScheme[i].id = i+1
+     }
 }
 
 function render(){
   const colortHtml = colorScheme.map((item) =>{
-
     return `
     <div class='container-color-scheme' id=${item.id} onclick=getHex(${item.id})>
     <div class='container-color-scheme' >
@@ -52,14 +50,19 @@ function getHex(id){
   colorScheme.map(item=>{
     if(item.id === id){
       navigator.clipboard.writeText(`${item.hex.value}`)
-      console.log(item.hex.value)
+      console.log(item.id)
     }
   })
 }
 
-getColorBtn.addEventListener('click',()=>{
-  getScheme()
+async function getColorScheme(){
+  await fetchColor()
   render()
+}
+
+getColorBtn.addEventListener('click',()=>{
+  console.log('click')
+  getColorScheme()
 })
 
 
