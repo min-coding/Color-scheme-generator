@@ -22,6 +22,7 @@ chosenColor.addEventListener('change',function(){
 async function getScheme() {
   const response = await fetch(`https://www.thecolorapi.com/scheme?hex=${colorCode}&mode=${modeValue}&count=4`);
   const data = await response.json();
+  console.log(data)
    colorScheme = data.colors
 
   //  Set id property to each color
@@ -35,10 +36,12 @@ function render(){
 
     return `
     <div class='container-color-scheme' id=${item.id} onclick=getHex(${item.id})>
-    <div class='color-scheme' style="background-color:${item.hex.value}"> 
+    <div class='container-color-scheme' >
+      <img src=${item.image.bare} class='color-scheme'> 
+      <p class='text-overlay'> Click to copy </p>
     </div>
-    <div class='modal'> Click to copy! </div>
-    <div class='hexCode'> ${item.hex.value} </div>
+      <div class='hexCode'> ${item.hex.value} </div>
+    </div>
     </div>
     `
 })
